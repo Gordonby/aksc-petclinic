@@ -27,6 +27,9 @@ az deployment group create -g aks-petclinic -f main.bicep
 ## Repo Notes
 
 This repo uses git submodules. The following commands were run to clone the respective repositories at a point in time.
+This was done rather than forking as
+- This project will not be contributing back to the Petclinic sample
+- Submodules captures the repo at a point in time, which is good for our sample. We can fetch latest and test as this sample is periodically reviewed.
 
 ```bash
 git submodule add https://github.com/Azure/AKS-Construction.git aks-construction
