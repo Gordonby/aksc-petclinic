@@ -1,4 +1,4 @@
-# aksc-petclinic
+# Spring PetClinic on AKS
 
 `status = in-progress`
 
