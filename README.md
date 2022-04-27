@@ -42,9 +42,9 @@ az deployment group create -g aks-petclinic -f main.bicep
 
 Well it looks like we can't go full bicep-code-golf, the issues outstanding are;
 
-Issue | Error? | Resolution | Impact 
------ | ------ | ---------- | ------
-Wavefront | Error: secret "wavefront" not found | Need to obtain a Wavefront API key and then create a Kubernetes secret. | App seems to work...
+Issue | Error | Impact  | Summary
+----- | ----- | ------- | ------
+Wavefront | Error: secret "wavefront" not found |  This is an optional step to make use of VMWare Tanzu Observability. | Create new bicep module to conditionally take parameter for the api key. Additionally we can look to enable Azure Application Insights as a further option.
 
 ## Repo Notes
 
