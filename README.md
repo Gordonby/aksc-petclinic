@@ -14,6 +14,10 @@ To deploy a sample of the Petclinic application into the Azure Kubernetes Servic
 
 Rather than use publicly hosted docker images, we will import them into an Azure Container Registry where they can be scanned by Microsoft Defender before being used in Kubernetes.
 
+### AKS
+
+The AKS Construction Set is being leveraged to deploy a secure cluster in a simple way.
+
 ## The bicep
 
 TODO: Diagram
@@ -21,6 +25,7 @@ TODO: Diagram
 Bicep File | Description
 ---------- | -----------
 main.bicep | Orchestrates creation of all resources
+aks-construction/main.bicep | Creates AKS and associated infrastructure components
 importImages.bicep | Imports container images into ACR from DockerHub
 
 
@@ -32,6 +37,14 @@ The Azure CLI is the only prerequisite. If you deploy from the Azure CloudShell 
 az group create -n aks-petclinic -l eastus
 az deployment group create -g aks-petclinic -f main.bicep
 ```
+
+## Other Steps???
+
+Well it looks like we can't go full bicep-code-golf, the issues outstanding are;
+
+Issue | Error? | Resolution | Impact 
+----- | ------ | ---------- | ------
+Wavefront | Error: secret "wavefront" not found | Need to obtain a Wavefront API key and then create a Kubernetes secret. | App seems to work...
 
 ## Repo Notes
 
