@@ -1,5 +1,7 @@
 # aksc-petclinic
 
+`status = in-progress`
+
 This repo deploys the Spring Petclinic application onto an Azure Kubernetes Cluster, all using bicep in a single `code-golf` step.
 
 ## Aim
@@ -13,6 +15,13 @@ To deploy a sample of the Petclinic application into the Azure Kubernetes Servic
 Rather than use publicly hosted docker images, we will import them into an Azure Container Registry where they can be scanned by Microsoft Defender before being used in Kubernetes.
 
 ## The bicep
+
+TODO: Diagram
+
+Bicep File | Description
+---------- | -----------
+main.bicep | Orchestrates creation of all resources
+importImages.bicep | Imports container images into ACR from DockerHub
 
 
 ## Lets deploy it!
