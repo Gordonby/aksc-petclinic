@@ -4,7 +4,7 @@
 
 ## Sample Objective
 
-To deploy a sample of the [Java Spring Petclinic](https://spring-petclinic.github.io/) microservices application into the Azure Kubernetes Service all using Bicep. 
+To deploy a sample of the [Java Spring Petclinic](https://spring-petclinic.github.io/) micro-services application, Azure Kubernetes Service and supporting infrastructure all using Bicep. 
 
 Deploying web applications as part of a Bicep deployment is not a production pattern, but is great for producing samples quickly. `#iac-code-golf`
 
