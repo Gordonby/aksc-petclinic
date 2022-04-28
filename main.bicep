@@ -1,6 +1,7 @@
 param nameseed string = 'petclinic'
 param location string =  resourceGroup().location
 
+param petClinicHelmUri string = 'https://github.com/Gordonby/aksc-petclinic/raw/main/spring-petclinic-cloud-chart/PetClinic-0.1.0.tgz'
 param wavefrontApiKey string = ''
 
 //---------Kubernetes Construction---------
@@ -85,7 +86,7 @@ module app 'br/public:deployment-scripts/aks-run-command:1.0.1' = {
       rbacWriter
     ]
     commands: [
-      'helm upgrade --install petapp . -n spring-petclinic --set wavefrontApiKey="${wavefrontApiKey}"'
+      'helm upgrade --install petapp ${petClinicHelmUri} -n spring-petclinic --set wavefrontApiKey="${wavefrontApiKey}"'
     ]
   }
   dependsOn: [
