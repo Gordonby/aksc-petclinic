@@ -1,33 +1,35 @@
-# Spring PetClinic on AKS
+# AKS-Construction - Spring PetClinic
 
-`status = in-progress`
+`status = in-progress (nearly there... 😄)`
 
-This repo deploys the Spring Petclinic application onto an Azure Kubernetes Cluster, all using bicep in a single `code-golf` step.
+## Sample Objective
 
-## Aim
-
-To deploy a sample of the Petclinic application into the Azure Kubernetes Service all using Bicep. This is not a real-world pattern, but great for producing samples quickly.
+To deploy a sample of the Petclinic application into the Azure Kubernetes Service all using Bicep. 
+Deploying web applications as part of a Bicep deployment is not a production pattern, but is great for producing samples quickly.
 
 ## Notable components
 
 ### ACR
 
-Rather than use publicly hosted docker images, we will import them into an Azure Container Registry where they can be scanned by Microsoft Defender before being used in Kubernetes.
+Rather than use publicly hosted docker images, we will import them into an Azure Container Registry where they can be [scanned by Microsoft Defender](https://docs.microsoft.com/azure/defender-for-cloud/defender-for-containers-introduction?tabs=defender-for-container-arch-aks#scanning-images-in-acr-registries) before being used in Kubernetes.
 
 ### AKS
 
-The AKS Construction Set is being leveraged to deploy a secure cluster in a simple way.
+[AKS Construction](https://github.com/Azure/Aks-Construction) is being leveraged to deploy a secure cluster in a simple way.
+
+## PetClinic - helm chart
+
+A simple helm chart for the PetClinic application has been created, read more about it [here](spring-petclinic-cloud-chart/README.md).
 
 ## The bicep
-
-TODO: Diagram
 
 Bicep File | Description
 ---------- | -----------
 main.bicep | Orchestrates creation of all resources
 aks-construction/main.bicep | Creates AKS and associated infrastructure components
 importImages.bicep | Imports container images into ACR from DockerHub
-
+createDatabase.bicep | Installs the MySql databases via helm charts
+installApp.bicep | Installs the Petclinic helm chart 
 
 ## Lets deploy it!
 
@@ -38,13 +40,26 @@ az group create -n aks-petclinic -l eastus
 az deployment group create -g aks-petclinic -f main.bicep
 ```
 
-## Other Steps???
+## The Result
 
-Well it looks like we can't go full bicep-code-golf, the issues outstanding are;
+## Deployed Resources
+
+![deployments](azDeployment.png)
+
+![acr](acrRepositories.png)
+
+## The Kubernetes Application
+
+```bash
+az aks get-credentials -n aks-petclinic -g aks-petclinic
+kubectl get po -n spring-petclinic
+```
+
+## Deployment Troubleshooting/Notes
 
 Issue | Error | Impact  | Summary
 ----- | ----- | ------- | ------
-Wavefront | Error: secret "wavefront" not found |  This is an optional step to make use of VMWare Tanzu Observability. | Create new bicep module to conditionally take parameter for the api key. Additionally we can look to enable Azure Application Insights as a further option.
+Wavefront | Error: secret "wavefront" not found |  This is an optional step to make use of VMWare Tanzu Observability. | Ideally we need to enhance helm chart to make wavefront install conditional. Additionally we can look to enable Azure Application Insights as a further option.
 
 ## Repo Notes
 
