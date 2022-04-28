@@ -30,10 +30,18 @@ main.bicep | Orchestrates creation of all resources
 aks-construction/main.bicep | Creates AKS and associated infrastructure components
 importImages.bicep | Imports container images into ACR from DockerHub
 
-Two public bicep modules are leveraged in this sample.
+Two [public registry](https://github.com/Azure/bicep-registry-modules) bicep modules are leveraged in this sample.
 
 - AKS Run Command [[readme](https://github.com/Azure/bicep-registry-modules/blob/main/modules/deployment-scripts/aks-run-command/README.md)]
 - Import ACR Images [[readme](https://github.com/Azure/bicep-registry-modules/blob/main/modules/deployment-scripts/import-acr/README.md)]
+
+Leveraging bicep modules from the public registry is a great way to save the complexity and repetition in your own IaC library.
+
+```bash
+module kubeNamespace 'br/public:deployment-scripts/aks-run-command:1.0.1' = {
+
+module acrImport 'br/public:deployment-scripts/import-acr:2.0.1' = {
+```
 
 ## Lets deploy it!
 
