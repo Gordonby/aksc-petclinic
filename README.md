@@ -4,8 +4,9 @@
 
 ## Sample Objective
 
-To deploy a sample of the Petclinic application into the Azure Kubernetes Service all using Bicep. 
-Deploying web applications as part of a Bicep deployment is not a production pattern, but is great for producing samples quickly.
+To deploy a sample of the [Java Spring Petclinic](https://spring-petclinic.github.io/) microservices application into the Azure Kubernetes Service all using Bicep. 
+
+Deploying web applications as part of a Bicep deployment is not a production pattern, but is great for producing samples quickly. `#iac-code-golf`
 
 ## Notable components
 
@@ -28,8 +29,11 @@ Bicep File | Description
 main.bicep | Orchestrates creation of all resources
 aks-construction/main.bicep | Creates AKS and associated infrastructure components
 importImages.bicep | Imports container images into ACR from DockerHub
-createDatabase.bicep | Installs the MySql databases via helm charts
-installApp.bicep | Installs the Petclinic helm chart 
+
+Two public bicep modules are leveraged in this sample.
+
+- AKS Run Command [[readme](https://github.com/Azure/bicep-registry-modules/blob/main/modules/deployment-scripts/aks-run-command/README.md)]
+- Import ACR Images [[readme](https://github.com/Azure/bicep-registry-modules/blob/main/modules/deployment-scripts/import-acr/README.md)]
 
 ## Lets deploy it!
 
@@ -46,14 +50,30 @@ az deployment group create -g aks-petclinic -f main.bicep
 
 ![deployments](azDeployment.png)
 
+### Imported Container Images
 ![acr](acrRepositories.png)
 
-## The Kubernetes Application
+### The Kubernetes Application
 
 ```bash
 az aks get-credentials -n aks-petclinic -g aks-petclinic
-kubectl get po -n spring-petclinic
+kubectl get svc -n spring-petclinic
+
+NAME                          TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)             AGE
+api-gateway                   LoadBalancer   172.10.122.227   20.232.248.202   80:31524/TCP        12m
+customers-db-mysql            ClusterIP      172.10.123.52    <none>           3306/TCP            50m
+customers-db-mysql-headless   ClusterIP      None             <none>           3306/TCP            50m
+customers-service             ClusterIP      172.10.79.168    <none>           8080/TCP            12m
+vets-db-mysql                 ClusterIP      172.10.222.167   <none>           3306/TCP            50m
+vets-db-mysql-headless        ClusterIP      None             <none>           3306/TCP            50m
+vets-service                  ClusterIP      172.10.247.35    <none>           8080/TCP            12m
+visits-db-mysql               ClusterIP      172.10.147.205   <none>           3306/TCP            50m
+visits-db-mysql-headless      ClusterIP      None             <none>           3306/TCP            50m
+visits-service                ClusterIP      172.10.184.235   <none>           8080/TCP            12m
+wavefront-proxy               ClusterIP      172.10.234.200   <none>           2878/TCP,9411/TCP   12m
 ```
+
+![web app](webapp.png)
 
 ## Deployment Troubleshooting/Notes
 
