@@ -57,7 +57,17 @@ az deployment group create -g aks-petclinic -f main.bicep
 
 ```bash
 az aks get-credentials -n aks-petclinic -g aks-petclinic
+kubectl get pod -n spring-petclinic
 kubectl get svc -n spring-petclinic
+
+NAME                                 READY   STATUS                       RESTARTS   AGE
+api-gateway-5f74c7b69-flxrz          1/1     Running                      0          12m
+customers-db-mysql-0                 1/1     Running                      0          50m
+customers-service-77449fc644-kfnlr   1/1     Running                      0          12m
+vets-db-mysql-0                      1/1     Running                      0          50m
+vets-service-56d58bbdcb-vpr5z        1/1     Running                      0          12m
+visits-db-mysql-0                    1/1     Running                      0          50m
+visits-service-8474b89fdc-g9lvh      1/1     Running                      0          12m
 
 NAME                          TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)             AGE
 api-gateway                   LoadBalancer   172.10.122.227   20.232.248.202   80:31524/TCP        12m
