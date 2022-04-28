@@ -68,6 +68,7 @@ vets-db-mysql-0                      1/1     Running                      0     
 vets-service-56d58bbdcb-vpr5z        1/1     Running                      0          12m
 visits-db-mysql-0                    1/1     Running                      0          50m
 visits-service-8474b89fdc-g9lvh      1/1     Running                      0          12m
+wavefront-proxy-648f66bbc5-72gsx     0/1     CreateContainerConfigError   0          12m
 
 NAME                          TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)             AGE
 api-gateway                   LoadBalancer   172.10.122.227   20.232.248.202   80:31524/TCP        12m
