@@ -1,7 +1,5 @@
 # AKS-Construction - Spring PetClinic
 
-`status = in-progress (nearly there... 😄)`
-
 ## Sample Objective
 
 To deploy a sample of the [Java Spring Petclinic](https://spring-petclinic.github.io/) micro-services application, Azure Kubernetes Service and supporting infrastructure all using Bicep from a single `az deployment` command. 
